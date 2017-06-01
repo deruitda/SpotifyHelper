@@ -1,0 +1,1 @@
+﻿* Make sure node server is running at C:\Users\dannyd1221\Documents\visual studio 2017\Projects\Speakify\Speakify/Server (node app.js)
