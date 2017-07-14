@@ -23,10 +23,11 @@ namespace Speakify
     {
         private SpotifyLocalAPI _spotifyLocal;
         SpotifyWebAPI _spotifyWeb;
-        private SpeechRecognizer _listen;
+        private SpeechRecognitionEngine _listen;
         private ResultTable _resultTable;
         private Track _currSong;
         private bool _isPlaying;
+        private Paging<SimplePlaylist> _playlists;
 
 
         public frmHome()
@@ -34,7 +35,7 @@ namespace Speakify
             InitializeComponent();
             SetupLocal();
             SetupWeb();
-            //listen();
+            SetupListen();
         }
 
         private void SetupLocal()
@@ -109,13 +110,22 @@ namespace Speakify
 
         private void SetupListen()
         {
-            _listen = new SpeechRecognizer();
+            _listen = new SpeechRecognitionEngine();
 
-            Choices colors = new Choices();
-            colors.Add(new String[] { "red", "green", "blue" });
+            Choices playlistsChoice = new Choices();
+
+            _playlists = _spotifyWeb.GetUserPlaylists("deruitda");
+
+            foreach (SimplePlaylist playlist in _playlists.Items)
+            {
+                playlistsChoice.Add(new String[] {playlist.Name} );
+            }
+            playlistsChoice.Add(new String[] { "spotify" });
+
+
 
             GrammarBuilder gb = new GrammarBuilder();
-            gb.Append(colors);
+            gb.Append(playlistsChoice);
 
             Grammar g = new Grammar(gb);
 
@@ -123,11 +133,58 @@ namespace Speakify
 
             _listen.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(sr_speechRecognized);
 
+            _listen.SetInputToDefaultAudioDevice();
+
+            _listen.RecognizeAsync();
+
         }
 
         private void sr_speechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            MessageBox.Show(e.Result.Text);
+
+            SimplePlaylist a = _playlists.Items.FirstOrDefault(p => p.Name == e.Result.Text);
+            if (e.Result.Text != "spotify")
+            {
+                _spotifyLocal.PlayURL(a.Uri);
+            }
+            _listen.RecognizeAsyncCancel();
+            _listen.RecognizeAsyncStop();
+
+            ResetListener();
+        }
+
+        private void ResetListener()
+        {
+            GrammarBuilder gb = new GrammarBuilder();
+            gb.Append(GetBaseChoices());
+            gb.Append(GetUserPlaylists("deruitda"));
+
+            Grammar g = new Grammar(gb);
+
+            _listen.LoadGrammar(g);
+            _listen.RecognizeAsync();
+        }
+
+        private Choices GetBaseChoices()
+        {
+            Choices baseChoices = new Choices();
+            baseChoices.Add(new String[]{"spotify", "play", "pause", "skip", "goback"});
+
+            return baseChoices;
+        }
+
+        private Choices GetUserPlaylists(string userID)
+        {
+            Choices playlistsChoice = new Choices();
+
+            _playlists = _spotifyWeb.GetUserPlaylists("deruitda");
+
+            foreach (SimplePlaylist playlist in _playlists.Items)
+            {
+                playlistsChoice.Add(new String[] { playlist.Name });
+            }
+
+            return playlistsChoice;
         }
 
         private void btnNext_Click(object sender, EventArgs e)
