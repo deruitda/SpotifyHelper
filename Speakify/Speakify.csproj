@@ -41,6 +41,9 @@
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SpotifyAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpotifyAPI-NET.2.15.1\lib\SpotifyAPI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Speech" />
@@ -67,94 +70,6 @@
       <DependentUpon>frmHome.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI.Example\ExampleForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI.Example\ExampleForm.Designer.cs">
-      <DependentUpon>ExampleForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI.Example\LocalControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI.Example\LocalControl.Designer.cs">
-      <DependentUpon>LocalControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI.Example\Properties\Settings.Designer.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI.Example\WebControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI.Example\WebControl.Designer.cs">
-      <DependentUpon>WebControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Local\Enums\AlbumArtSize.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Local\ExtendedWebClient.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Local\LocalEvents.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Local\Models\CFID.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Local\Models\OpenGraphState.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Local\Models\SpotifyResource.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Local\Models\SpotifyUri.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Local\Models\StatusResponse.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Local\Models\Track.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Local\Models\TrackResourceLocation.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Local\RemoteHandler.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Local\SpotifyLocalAPI.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Local\VolumeMixerControl.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Auth\AutorizationCodeAuth.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Auth\ClientCredentialsAuth.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Auth\ImplicitGrantAuth.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Auth\WebApiFactory.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Enums\AlbumType.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Enums\FollowType.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Enums\RepeatState.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Enums\Scope.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Enums\SearchType.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Enums\TimeRangeType.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\IClient.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\ArrayResponse.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\AudioFeatures.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\AvailabeDevices.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\BasicModel.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\Category.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\CategoryList.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\CategoryPlaylist.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\CursorPaging.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\Device.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\FeaturedPlaylists.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\FollowedArtists.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\FullAlbum.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\FullArtist.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\FullPlaylist.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\FullTrack.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\GeneralModels.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\NewAlbumReleases.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\Paging.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\PlaybackContext.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\PlayHistory.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\PrivateProfile.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\PublicProfile.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\Recommendations.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\RecommendationSeed .cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\RecommendationSeedGenres.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\ResponseInfo.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\SearchItem.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\SeveralAlbums.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\SeveralArtists.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\SeveralAudioFeatures.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\SeveralTracks.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\SimpleAlbum.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\SimpleArtist.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\SimplePlaylist.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\SimpleTrack.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\Snapshot.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\Token.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Models\TuneableTrack.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\SimpleHttpServer.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\SpotifyWebAPI.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\SpotifyWebBuilder.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\SpotifyWebClient.cs" />
-    <Compile Include="SpotifyAPI-NET\SpotifyAPI\Web\Util.cs" />
     <Compile Include="Controls\cSearchResults.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -173,16 +88,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="SpotifyAPI-NET\SpotifyAPI.Example\ExampleForm.resx">
-      <DependentUpon>ExampleForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SpotifyAPI-NET\SpotifyAPI.Example\LocalControl.resx">
-      <DependentUpon>LocalControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SpotifyAPI-NET\SpotifyAPI.Example\Properties\Resources.resx" />
-    <EmbeddedResource Include="SpotifyAPI-NET\SpotifyAPI.Example\WebControl.resx">
-      <DependentUpon>WebControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\cSearchResults.resx">
       <DependentUpon>cSearchResults.cs</DependentUpon>
     </EmbeddedResource>
@@ -196,58 +101,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="SpotifyAPI-NET\.git\config" />
-    <None Include="SpotifyAPI-NET\.git\description" />
-    <None Include="SpotifyAPI-NET\.git\HEAD" />
-    <None Include="SpotifyAPI-NET\.git\hooks\applypatch-msg.sample" />
-    <None Include="SpotifyAPI-NET\.git\hooks\commit-msg.sample" />
-    <None Include="SpotifyAPI-NET\.git\hooks\post-update.sample" />
-    <None Include="SpotifyAPI-NET\.git\hooks\pre-applypatch.sample" />
-    <None Include="SpotifyAPI-NET\.git\hooks\pre-commit.sample" />
-    <None Include="SpotifyAPI-NET\.git\hooks\pre-push.sample" />
-    <None Include="SpotifyAPI-NET\.git\hooks\pre-rebase.sample" />
-    <None Include="SpotifyAPI-NET\.git\hooks\prepare-commit-msg.sample" />
-    <None Include="SpotifyAPI-NET\.git\hooks\update.sample" />
-    <None Include="SpotifyAPI-NET\.git\index" />
-    <None Include="SpotifyAPI-NET\.git\info\exclude" />
-    <None Include="SpotifyAPI-NET\.git\logs\HEAD" />
-    <None Include="SpotifyAPI-NET\.git\logs\refs\heads\master" />
-    <None Include="SpotifyAPI-NET\.git\logs\refs\remotes\origin\HEAD" />
-    <None Include="SpotifyAPI-NET\.git\objects\pack\pack-7571fdc6ce996cc0a9f66fc7f172f4bbe30463c0.idx" />
-    <None Include="SpotifyAPI-NET\.git\objects\pack\pack-7571fdc6ce996cc0a9f66fc7f172f4bbe30463c0.pack" />
-    <None Include="SpotifyAPI-NET\.git\packed-refs" />
-    <None Include="SpotifyAPI-NET\.git\refs\heads\master" />
-    <None Include="SpotifyAPI-NET\.git\refs\remotes\origin\HEAD" />
-    <None Include="SpotifyAPI-NET\LICENSE" />
-    <None Include="SpotifyAPI-NET\README.md" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\docs.cmd" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\docs\index.md" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\docs\SpotifyLocalAPI\index.md" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\docs\SpotifyWebAPI\albums.md" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\docs\SpotifyWebAPI\artists.md" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\docs\SpotifyWebAPI\auth.md" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\docs\SpotifyWebAPI\browse.md" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\docs\SpotifyWebAPI\examples.md" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\docs\SpotifyWebAPI\follow.md" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\docs\SpotifyWebAPI\gettingstarted.md" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\docs\SpotifyWebAPI\library.md" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\docs\SpotifyWebAPI\player.md" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\docs\SpotifyWebAPI\playlists.md" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\docs\SpotifyWebAPI\profiles.md" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\docs\SpotifyWebAPI\search.md" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\docs\SpotifyWebAPI\tracks.md" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\docs\SpotifyWebAPI\util.md" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\mkdocs.yml" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\mytheme\fonts\fontawesome-webfont.eot" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\mytheme\fonts\fontawesome-webfont.ttf" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Docs\mytheme\fonts\fontawesome-webfont.woff" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Example\App.config" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Example\Properties\Settings.settings" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Tests\fixtures\private-user.json" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Tests\fixtures\public-user.json" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI.Tests\packages.config" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI\app.config" />
-    <None Include="SpotifyAPI-NET\SpotifyAPI\packages.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -255,32 +108,7 @@
   <ItemGroup>
     <Content Include="app.js" />
     <Content Include="Notes.txt" />
-    <Content Include="SpotifyAPI-NET\.gitattributes" />
-    <Content Include="SpotifyAPI-NET\.gitignore" />
-    <Content Include="SpotifyAPI-NET\SpotifyAPI.Docs\.gitignore" />
-    <Content Include="SpotifyAPI-NET\SpotifyAPI.Docs\docs\highlight.js" />
-    <Content Include="SpotifyAPI-NET\SpotifyAPI.Docs\mytheme\base.html" />
-    <Content Include="SpotifyAPI-NET\SpotifyAPI.Docs\mytheme\content.html" />
-    <Content Include="SpotifyAPI-NET\SpotifyAPI.Docs\mytheme\css\base.css" />
-    <Content Include="SpotifyAPI-NET\SpotifyAPI.Docs\mytheme\css\bootstrap-custom.min.css" />
-    <Content Include="SpotifyAPI-NET\SpotifyAPI.Docs\mytheme\css\font-awesome-4.0.3.css" />
-    <Content Include="SpotifyAPI-NET\SpotifyAPI.Docs\mytheme\css\prettify-1.0.css" />
-    <Content Include="SpotifyAPI-NET\SpotifyAPI.Docs\mytheme\fonts\fontawesome-webfont.svg" />
-    <Content Include="SpotifyAPI-NET\SpotifyAPI.Docs\mytheme\img\favicon.ico" />
-    <Content Include="SpotifyAPI-NET\SpotifyAPI.Docs\mytheme\js\base.js" />
-    <Content Include="SpotifyAPI-NET\SpotifyAPI.Docs\mytheme\js\bootstrap-3.0.3.min.js" />
-    <Content Include="SpotifyAPI-NET\SpotifyAPI.Docs\mytheme\js\prettify-1.0.min.js" />
-    <Content Include="SpotifyAPI-NET\SpotifyAPI.Docs\mytheme\nav.html" />
-    <Content Include="SpotifyAPI-NET\SpotifyAPI.Docs\mytheme\toc.html" />
-    <Content Include="SpotifyAPI-NET\SpotifyAPI.sln" />
-    <Content Include="SpotifyAPI-NET\SpotifyAPI\SpotifyAPI.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SpotifyAPI-NET\.git\branches\" />
-    <Folder Include="SpotifyAPI-NET\.git\objects\info\" />
-    <Folder Include="SpotifyAPI-NET\.git\refs\tags\" />
-    <Folder Include="SpotifyAPI-NET\SpotifyAPI.Tests\Properties\" />
-    <Folder Include="SpotifyAPI-NET\SpotifyAPI\Properties\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
