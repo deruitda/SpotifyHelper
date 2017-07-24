@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using Newtonsoft.Json.Linq;
+using Speakify.Libraries;
 using SpotifyAPI.Web;
 using SpotifyAPI.Web.Auth;
 using SpotifyAPI.Web.Enums;
@@ -17,6 +18,8 @@ using SpotifyAPI.Local.Models;
 
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
+//TODO: Need to move 90% of this code out of the home form, should be done in some utility class
+
 namespace Speakify
 {
     public partial class frmHome : Form
@@ -24,6 +27,7 @@ namespace Speakify
         private SpotifyLocalAPI _spotifyLocal;
         SpotifyWebAPI _spotifyWeb;
         private SpeechRecognitionEngine _listen;
+        private SpeechRecognitionEngine _playlistListen;
         private ResultTable _resultTable;
         private Track _currSong;
         private bool _isPlaying;
@@ -110,65 +114,88 @@ namespace Speakify
 
         private void SetupListen()
         {
+            InitMainListener();
+            InitPlaylistListener();
+        }
+
+        private void mainListen_speechRecognized(object sender, SpeechRecognizedEventArgs e)
+        {
+            _listen.RecognizeAsyncStop();
+            //listen for a playlist name for 5 seconds
+            _playlistListen.Recognize(new TimeSpan(0, 0, 10));
+
+            InitMainListener();
+        }
+
+        private void playlistListen_speechRecognized(object sender, SpeechRecognizedEventArgs e)
+        {
+            SimplePlaylist playList = new SimplePlaylist();
+            
+            //Find playlist in list of user playlists
+            //TODO: replace with LINQ
+            foreach (SimplePlaylist p in _playlists.Items)
+            {
+                if (p.Name.Equals(e.Result.Text))
+                {
+                    playList = p;
+                    break;
+                }
+            }
+                
+            if (!String.IsNullOrEmpty(playList.Name))
+                _spotifyLocal.PlayURL(playList.Uri);
+            else
+                MessageBox.Show(String.Format("Could not find playlist: {0}", e.Result.Text));
+
+            InitPlaylistListener();
+            
+        }
+
+        private void InitMainListener()
+        {
             _listen = new SpeechRecognitionEngine();
 
-            Choices playlistsChoice = new Choices();
-
-            _playlists = _spotifyWeb.GetUserPlaylists("deruitda");
-
-            foreach (SimplePlaylist playlist in _playlists.Items)
-            {
-                playlistsChoice.Add(new String[] {playlist.Name} );
-            }
-            playlistsChoice.Add(new String[] { "spotify" });
-
-
+            //give the listener the keyword to wait for
+            Choices baseChoices = GetBaseChoices();
 
             GrammarBuilder gb = new GrammarBuilder();
-            gb.Append(playlistsChoice);
+            gb.Append(baseChoices);
 
             Grammar g = new Grammar(gb);
 
             _listen.LoadGrammar(g);
-
-            _listen.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(sr_speechRecognized);
-
+            _listen.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(mainListen_speechRecognized);
             _listen.SetInputToDefaultAudioDevice();
-
-            _listen.RecognizeAsync();
-
+            //RecognizeMode.Multiple will allow the listener to continue listening after completion
+            _listen.RecognizeAsync(RecognizeMode.Multiple);
         }
 
-        private void sr_speechRecognized(object sender, SpeechRecognizedEventArgs e)
+        private void InitPlaylistListener()
         {
 
-            SimplePlaylist a = _playlists.Items.FirstOrDefault(p => p.Name == e.Result.Text);
-            if (e.Result.Text != "spotify")
-            {
-                _spotifyLocal.PlayURL(a.Uri);
-            }
-            _listen.RecognizeAsyncCancel();
-            _listen.RecognizeAsyncStop();
+            _playlistListen = new SpeechRecognitionEngine();
 
-            ResetListener();
-        }
+            //give the listener the keyword to wait for
+            //TODO: Remove hardcoded username
+            Choices playlistChoices = GetUserPlaylists("deruitda");
 
-        private void ResetListener()
-        {
+            //add each of the user's playlists to the 
+            _playlists.Items.ForEach(playlist => playlistChoices.Add(new String[] { playlist.Name }));
+
             GrammarBuilder gb = new GrammarBuilder();
-            gb.Append(GetBaseChoices());
-            gb.Append(GetUserPlaylists("deruitda"));
+            gb.Append(playlistChoices);
 
             Grammar g = new Grammar(gb);
 
-            _listen.LoadGrammar(g);
-            _listen.RecognizeAsync();
+            _playlistListen.LoadGrammar(g);
+            _playlistListen.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(playlistListen_speechRecognized);
+            _playlistListen.SetInputToDefaultAudioDevice();
         }
 
         private Choices GetBaseChoices()
         {
             Choices baseChoices = new Choices();
-            baseChoices.Add(new String[]{"spotify", "play", "pause", "skip", "goback"});
+            baseChoices.Add(new String[] { SpokenCommands.BaseCommands.Play, SpokenCommands.BaseCommands.Resume, SpokenCommands.BaseCommands.Pause, SpokenCommands.BaseCommands.Skip, SpokenCommands.BaseCommands.GoBack });
 
             return baseChoices;
         }
@@ -177,12 +204,10 @@ namespace Speakify
         {
             Choices playlistsChoice = new Choices();
 
-            _playlists = _spotifyWeb.GetUserPlaylists("deruitda");
+            _playlists = _spotifyWeb.GetUserPlaylists(userID);
 
             foreach (SimplePlaylist playlist in _playlists.Items)
-            {
-                playlistsChoice.Add(new String[] { playlist.Name });
-            }
+                playlistsChoice.Add(new String[] { playlist.Name.Trim() });
 
             return playlistsChoice;
         }
@@ -233,7 +258,7 @@ namespace Speakify
             for (int i = 0; i < results.Tracks.Items.Count; i++)
             {
                 //do the top 3 results
-                if(i <= 3)
+                if (i <= 3)
                     cbSearch.Items.Add(results.Tracks.Items[i].Name);
             }
 
@@ -260,7 +285,7 @@ namespace Speakify
             this.Size = new Size(1020, 130);
 
 
-            _resultTable = new ResultTable(results); 
+            _resultTable = new ResultTable(results);
             this.cSearchResults1.UpdateGrid(_resultTable);
         }
 

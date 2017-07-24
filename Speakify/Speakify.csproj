@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Libraries\SpokenCommands.cs" />
     <Compile Include="Objects\Listener.cs" />
     <Compile Include="ResultTable.cs">
       <SubType>Component</SubType>
