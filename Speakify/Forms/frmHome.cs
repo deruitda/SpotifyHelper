@@ -135,7 +135,7 @@ namespace Speakify
             //TODO: replace with LINQ
             foreach (SimplePlaylist p in _playlists.Items)
             {
-                if (p.Name.Equals(e.Result.Text))
+                if (p.Name.Trim().Equals(e.Result.Text))
                 {
                     playList = p;
                     break;
